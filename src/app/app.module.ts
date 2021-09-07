@@ -3,13 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
+import {HttpClientModule} from '@angular/common/http';
 
 import { HeaderComponent } from './header/header.component';
 import { NavitemsComponent } from './navitems/navitems.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionComponent } from './transaction/transaction.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,16 @@ import { TransactionComponent } from './transaction/transaction.component';
     LoginComponent,
      HeaderComponent,
      NavitemsComponent,
-     TransactionComponent
+     TransactionComponent,
+     DashboardComponent,
+     HomeComponent,
+     HistoryComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {
       path:"login",component:LoginComponent  
@@ -31,7 +38,13 @@ import { TransactionComponent } from './transaction/transaction.component';
       path:"transaction", component:TransactionComponent
     },
     {
-      path:'', component:LoginComponent
+      path:"dashboard", component:DashboardComponent
+    },
+    {
+      path:"history", component:HistoryComponent
+    },
+    {
+      path:"home", component:HomeComponent
     }
     
 

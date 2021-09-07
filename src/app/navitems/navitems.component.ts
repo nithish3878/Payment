@@ -22,7 +22,16 @@ export class NavitemsComponent {
     {
     text:"Transaction",
     link:"transaction"
-    }
+    },
+    {
+      text:"History",
+      link:"history"
+      },
+    
+    {
+      text:"Dashboard",
+      link:"dashboard"
+      }
   ]
   };
 
