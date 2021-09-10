@@ -5,35 +5,57 @@
         <div class="form-group">
             <label for="customerid" class="form-label mt-4">Customer Id</label>
             <input type="text" class="form-control" id="customerid" name="customerid" aria-describedby="customerid"
-                placeholder="Enter customerid" [(ngModel)]="transaction.customerid" readonly>
+                 [value]="transaction.customerid" readonly>
         </div>
         <div class="form-group">
             <label for="senderbic" class="form-label mt-4">SenderBIC</label>
             <input type="text" class="form-control" id="senderbic" name="senderbic" aria-describedby="senderbic"
-                placeholder="Enter senderbic" [(ngModel)]="transaction.senderbic" readonly>
+                 [value]="transaction.senderbic" readonly>
         </div>
         <div class="form-group">
             <label for="receiverid" class="form-label mt-4">receiverid</label>
             <input type="text" class="form-control" id="receiverid" name="receiverid" aria-describedby="receiverid"
-                placeholder="Enter receiverid" [(ngModel)]="transaction.receiverid">
+                placeholder="Enter receiverid" [(ngModel)]="transaction.receiverid" (keyup)="fetch()">
+        </div>
+        <div *ngIf="!flag" class="text-danger mt-2">
+            <div  >receiverid is not valid</div>
+         </div>
+        <div class="form-group">
+            <label for="receivername" class="form-label mt-4">receivername</label>
+            <input type="text" class="form-control" id="receivername" name="receivername" aria-describedby="receiverid"
+             [value]="transaction.receivername" readonly>
         </div>
         <div class="form-group">
             <label for="receiverbic" class="form-label mt-4">recieverBIC</label>
             <input type="text" class="form-control" id="receiverbic" name="receiverbic" aria-describedby="receiverbic"
-                placeholder="Enter receiverbic" [(ngModel)]="transaction.receiverbic" readonly>
+                 [value]="transaction.receiverbic" readonly>
         </div>
         <div class="form-group">
-            <label for="transfertype" 
-            class="form-label mt-4">TransferType</label>
+            <label for="receiverbankname" class="form-label mt-4">receiverbankname</label>
+            <input type="text" class="form-control" id="receiverbankname" name="receiverbankname" aria-describedby="receiverid"
+             [value]="transaction.receiverbankname" readonly>
+        </div>
+        <!-- <div *ngIf="customertype=='I'" class="form-group">
+            <label for="transfertype" class="form-label mt-4">transfertype</label>
+            <input  type="text" class="form-control" id="transfertype" name="transfertype" aria-describedby="receiverid"
+             [value]="Customer transfer" readonly>
+             
+        </div>
+         -->
+       
+         
+        <div class="form-group">
+            <label for="messagetype" 
+            class="form-label mt-4">Message Type</label>
                 <select 
-                id="transfertype" 
-                name="transfertype"         
+                id="messagetype" 
+                name="messagetype"         
                 class="form-select">
-                    <option value="">select transfer type</option>
+                    <option value="">select message type</option>
                     <option 
-                    *ngFor="let c of transfertypes" 
-                    [value]="c.code" 
-                    >{{c.name}}
+                    *ngFor="let m of messagetypes" 
+                    [value]="m.code" 
+                    >{{m.name}}
                     </option>
                 </select>
         </div>

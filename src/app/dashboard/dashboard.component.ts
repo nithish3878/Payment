@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginserviceService } from '../loginservice.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +9,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  customer:any
-  constructor(private router:Router,private http:HttpClient) { }
+  customer:any={}
+  bank:any={}
+
+  
+  id:any
+  
+  constructor(private router:Router,private http:HttpClient
+    ,private service:LoginserviceService,private route: ActivatedRoute) {
+      // this.route.queryParams.subscribe(params => {
+      //   this.id = params['id'];
+      //   console.log(params['id'])
+      // });
+    
+
+   }
   //
   ngOnInit(): void {
-    this.http.get('http://localhost:8080/customer/123456')
+    
+    this.http.get('http://localhost:8080/customer/'+this.service.userid)
     .subscribe((result: any) => {
-      this.customer = result
+      this.customer = result;
+      this.bank=result.bic;
+      this.service.setBank(this.bank);
+      this.service.customertype=result.customertype;
+      console.log(result);
     },err=>{
       console.log(err);
     })
+    
 } 
       
 
