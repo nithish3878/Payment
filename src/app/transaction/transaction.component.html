@@ -35,13 +35,15 @@
             <input type="text" class="form-control" id="receiverbankname" name="receiverbankname" aria-describedby="receiverid"
              [value]="transaction.receiverbankname" readonly>
         </div>
-        <!-- <div *ngIf="customertype=='I'" class="form-group">
+         <div  class="form-group">
             <label for="transfertype" class="form-label mt-4">transfertype</label>
-            <input  type="text" class="form-control" id="transfertype" name="transfertype" aria-describedby="receiverid"
-             [value]="Customer transfer" readonly>
+            <input *ngIf="customertype=='B'" type="text" class="form-control" id="transfertype" name="transfertype" aria-describedby="receiverid"
+             value="Bank to Bank transfer" readonly>
+             <input *ngIf="customertype=='I'" type="text" class="form-control" id="transfertype" name="transfertype" aria-describedby="receiverid"
+             value="Customer transfer" readonly>
              
         </div>
-         -->
+         
        
          
         <div class="form-group">

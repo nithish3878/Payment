@@ -11,7 +11,7 @@ export class TransactionComponent implements OnInit {
   transaction: any;
   messagetypes:any;
   flag:any=true;
-  customertype:any='I';
+  customertype:any;
   transfertypes:any;
   constructor(private service:LoginserviceService,private http:HttpClient) { 
     this.transaction={
