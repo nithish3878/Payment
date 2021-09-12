@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   id:any
   
   constructor(private router:Router,private http:HttpClient
-    ,private service:LoginserviceService,private route: ActivatedRoute) {
+    ,private service:LoginserviceService) {
       // this.route.queryParams.subscribe(params => {
       //   this.id = params['id'];
       //   console.log(params['id'])
@@ -26,17 +26,20 @@ export class DashboardComponent implements OnInit {
    }
   //
   ngOnInit(): void {
-    
+    if(this.service.loggedin()){
     this.http.get('http://localhost:8080/customer/'+this.service.userid)
     .subscribe((result: any) => {
       this.customer = result;
       this.bank=result.bic;
       this.service.setBank(this.bank);
       this.service.customertype=result.customertype;
-      console.log(result);
+      //console.log(result);
     },err=>{
       console.log(err);
-    })
+    })}
+    else{
+      this.router.navigate(["/login"]);
+    }
     
 } 
       

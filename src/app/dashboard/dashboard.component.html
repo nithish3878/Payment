@@ -3,7 +3,7 @@
 <table class="table table-dark table-hover">
     <tr>
         <th><b>Customer ID</b></th>
-        <td>{{customer.customerId}}</td>
+        <td>{{customer.customerid}}</td>
       </tr>
       <tr>
         <th><b>Over-draft</b></th>
@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <th><b>Balance</b></th>
-        <td>{{customer.clearbalance}}</td>
+        <td>{{customer.clearbalance|currency:"INR"}}</td>
       </tr>
       <tr>
         <th><b>Type</b></th>
@@ -33,7 +33,7 @@
 
     <tr>
       <th><b>Bank</b></th>
-      <td>{{bank.bankName}}</td>
+      <td>{{bank.bankname}}</td>
     </tr>
 
   </table>

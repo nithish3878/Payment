@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginserviceService } from '../loginservice.service';
 
 
@@ -7,11 +8,11 @@ import { LoginserviceService } from '../loginservice.service';
   templateUrl: './navitems.component.html',
   styleUrls: ['./navitems.component.css']
 })
-export class NavitemsComponent implements OnInit{
+export class NavitemsComponent {
   
   //navitems: Array<any>
   userid:any
-   constructor(private service:LoginserviceService) {
+   constructor(private service:LoginserviceService,private router:Router) {
     
   //   this.navitems = [{
   //     text: "Home",
@@ -40,9 +41,14 @@ export class NavitemsComponent implements OnInit{
 
 
 }
-ngOnInit()
+loggedin()
 {
   this.userid=this.service.userid;
-  console.log("userid"+this.userid)
+  return this.userid;
+}
+logout()
+{
+  this.service.userid=""
+  this.router.navigate(["/login"])
 }
 }

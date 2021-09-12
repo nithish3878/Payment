@@ -14,18 +14,48 @@ export class TransactionComponent implements OnInit {
   customertype:any;
   transfertypes:any;
   constructor(private service:LoginserviceService,private http:HttpClient) { 
-    this.transaction={
-      customerid:this.service.getuserid(),
-      senderbic: this.service.Bank.bic,
-      receiverid:"",
-      receivername:"",
-      receiverbic:"" , 
-      receiverbankname:"", 
-      transfertypecode:"",
-      currencyamount:0,
-      transferfees:0,
-      messagetype:""
+    // this.transaction={
+    //   // transactionid:"",
+    //   // customerid:this.service.getuserid(),
+    //   // senderbic: this.service.Bank.bic,
+    //   // receiverid:"",
+    //   // receivername:"",
+    //   // receiverbic:"" , 
+    //   // receiverbankname:"", 
+    //   // transfertypecode:"",
+    //   // currencyamount:0,
+    //   // transferfees:0,
+    //   // messagetype:""
       
+    // }
+    this.transaction={
+      "transactionid": 0,
+      "customer": this.service.customer,
+      
+      "currency": {
+        "currencycode": "INR",
+        "currencyname": "Indian Rupees",
+        "conversionrate": 1
+      },
+      "senderBIC": this.service.Bank,
+      "receiverBIC": {
+        "bankname": "",
+        "bic": ""
+      },
+      "receiveraccountholdernumber": "",
+      "receiveraccountholdername": "",
+      "transfertypecode": {
+        "transfertypecode": "",
+        "transfertypedescription": ""
+      },
+      "message": {
+        "messagecode": "",
+        "instruction": ""
+      },
+      "currencyamount": 1,
+      "inramount": 0,
+      "transferfees": 0,
+      "transferdate": ""
     }
     
         this.http.get("http://localhost:8080/message")
@@ -48,35 +78,47 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.customertype=this.service.customertype;
+    
   }
   handleRegister()
   {
+      this.transaction.transferfees=this.transaction.inramount*0.0025
+      //this.transaction.message.instruction=this.messagetypes.
+      if(this.customertype=='B'){
+      this.transaction.transfertypecode.transfertypedescription="Bank Transfer";
+      this.transaction.transfertypecode.transfertypecode="B";
+      }
+      else{
+      this.transaction.transfertypecode.transfertypedescription="Customer Transfer";
+      this.transaction.transfertypecode.transfertypecode="C"
 
   }
+}
+
   fetch()
   {
     let num="";
-    num=this.transaction.receiverid;
+    num=this.transaction.receiveraccountholdernumber;
     
     
     this.http.get("http://localhost:8080/customer/"+num)
     .subscribe((result:any)=>{
-      this.transaction.receiverbic = result.bic.bic;
-      this.transaction.receivername = result.accountholdername;
-      this.transaction.receiverbankname=result.bic.bankName;
+      this.transaction.receiverBIC = result.bic;
+      this.transaction.receiveraccountholdername = result.accountholdername;
+      this.transaction.receiverbankname=result.bic.bankname;
      console.log(result);
      
      this.flag=true
     },
     err=>{
       console.log(err);
-      this.transaction.receiverbic = "";
-      this.transaction.receivername = "";
-      this.transaction.receiverbankname="";
+      this.transaction.receiverBIC.bic = "";
+      this.transaction.receiveraccountholdername = "";
+      this.transaction.receiverBIC.bankname="";
       this.flag=false
       
     })
-    console.log(this.transaction.receiverid);
+    console.log(this.transaction.receiveraccountholdernumber);
 
 
 

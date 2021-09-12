@@ -10,7 +10,7 @@ export class LoginserviceService {
   flag:any
   Bank:any={}
   customertype:any;
-
+  customer:any;
   constructor(private http:HttpClient,private router:Router) {
     this.userid=""
    }
@@ -23,7 +23,8 @@ export class LoginserviceService {
       }
       else{
       this.flag=0;
-        this.userid=result.customer.customerId;
+        this.userid=result.customer.customerid;
+        this.customer=result.customer;
         this.router.navigate(["/dashboard"]);
         
       }
@@ -47,6 +48,9 @@ export class LoginserviceService {
   {
     this.Bank=bank;
 
+  }
+  loggedin(){
+    return this.userid;
   }
    }
 
